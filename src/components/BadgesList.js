@@ -1,7 +1,7 @@
-import React from 'react'
+import React, {Component} from 'react'
 import './styles/BadgesList.css'
 
-class BadgesListItem extends React.Component {
+class BadgesListItem extends Component {
     render() {
       return (
         <div className="BadgesListItem">
