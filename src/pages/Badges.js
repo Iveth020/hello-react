@@ -5,15 +5,18 @@ import './styles/Badges.css'
 import confLogo from '../images/platziconf-logo.svg'
 import BadgesList from '../components/BadgesList.js'
 import PageLoading from '../components/PageLoading.js'
+import api from '../api.js'
+var cont = 0
 
 class Badges extends React.Component{ 
    state = {
+       
         loading: true,
         error:null,
-        data: [],
+        data: []
    }
     
-    componentDidMount(){
+   /* componentDidMount(){
         this.timeoutId = setTimeout(()=>{ // le podemos un id al setTimeout para que en caso de que no se pueda ejecutar llamamos 
         //la funcion que esta es omponentWillUnmount y se limpia la memoria * clearTimeout(this.timeoutId) *
 
@@ -58,25 +61,28 @@ class Badges extends React.Component{
     
     componentWillUnmount(){
         clearTimeout(this.timeoutId)//funcion setTimeout para limpiar memoria en caso de que no pueda ocurrir el setTimeout
-    } 
+    } */
 
-   /* componentDidMount(){
+    componentDidMount(){
         this.fetchData()
     }
 
-    fetchData = () => {
+    fetchData = async () => {
         this.setState({ loading:true, error:null })
 
         try { // para traer los datos con una llamada asincrona 
-            const  data = []
+            const  data = await api.badges.list();
             this.setState({ loading: false, data: data })
         }catch(error){
             this.setState({ loading: false, error: error })
         }
-    } */
+    } 
 
     render(){
-        if(this.state.loading){
+        
+        console.log(`${this.state.loading}, ${this.state.error}, ${this.state.data}, ${cont}`)
+        cont ++
+        if(this.state.loading === true){
             return <PageLoading /> 
         }
 
